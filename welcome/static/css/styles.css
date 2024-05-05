@@ -1,0 +1,79 @@
+/* Main content style */
+.content {
+    margin-left: 250px; /* Adjust as needed */
+    padding: 25px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Set width for each column */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 30%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 30%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 40%;
+}
+
+/* Sidebar style */
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    padding-top: 20px;
+}
+
+/* Sidebar link/button style */
+.sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+
+/* Style for button */
+.sidebar .btn-create {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.sidebar .btn-create:hover {
+    background-color: #45a049;
+}

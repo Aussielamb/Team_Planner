@@ -1,0 +1,47 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Member</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body class="content">
+
+<div>
+    <h1>Create New Member</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <form action="{% url 'new_member' %}" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+    
+        <label for="location">Location:</label>
+        <select id="location" name="location">
+            {% for location in locations %}
+                <option value="{{ location.location }}">{{ location.location }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <label for="role">Role:</label>
+        <select id="role" name="role">
+            <option value="Manager">Manager</option>
+            <option value="Member">Member</option>
+        </select><br><br>
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date"><br>
+        
+        <!-- Submit button -->
+        <input type="submit" value="Submit">
+    </form>
+    <a href="{% url 'welcome' %}">Return to Landing Page</a>
+</div>
+</body>
+{% endblock %}
+</html>
