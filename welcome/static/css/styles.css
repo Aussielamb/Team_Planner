@@ -1,8 +1,14 @@
 /* Main content style */
 .content {
-    margin-left: 250px; /* Adjust as needed */
+    margin-left: 250px;
     padding: 25px;
 }
+
+.loc-container {
+    border: 1px solid #111;
+    padding: 10px;
+}
+
 
 table {
     border-collapse: collapse;
@@ -19,7 +25,7 @@ th {
     background-color: #f2f2f2;
 }
 
-/* Set width for each column */
+
 th:nth-child(1),
 td:nth-child(1) {
     width: 30%;

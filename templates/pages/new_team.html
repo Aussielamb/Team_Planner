@@ -10,9 +10,15 @@
 </head>
 {% block content %}
 <body class="content">
-    <h1>Create New Team</h1>
-    <a href="{% url 'welcome' %}">Return to Landing Page</a>
-    <!-- Your form for creating a new member goes here -->
+    <div>
+        <h1>Create New Team</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+        <br><button onclick="location.href='{% url 'welcome' %}'">Return to Landing Page</button>
+    </div>
 </body>
 {% endblock %}
 </html>

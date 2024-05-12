@@ -1,16 +1,22 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Details</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
-<body>
+{% block content %}
+<body class="content">
     <h1>Member Details</h1>
     <p>Name: {{ member.name }}</p>
     <p>Role: {{ member.role }}</p>
     <p>Location: {{ member.location }}</p>
     <p>Start Date: {{ member.start_date }}</p>
-    <a href="{% url 'welcome' %}">Return to Landing Page</a>
+    <br><button onclick="location.href='{% url 'member_update' member.id %}'">Update Member</button>
+    <br><br><button onclick="location.href='{% url 'welcome' %}'">Return to Landing Page</button>
 </body>
+{% endblock %}
 </html>

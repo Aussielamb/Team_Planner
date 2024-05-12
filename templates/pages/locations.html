@@ -1,0 +1,25 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Locations</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body class="content">
+    <h1>All Locations</h1>
+        {% for location in all_locations %}
+            <div class="loc-container">
+                <p><strong>{{ location.location }}</strong></p>
+                <p>Phone: {{ location.phone_Number }}</p>
+                <p>Address: {{ location.physical_Address }}</p>
+                <p>State: {{ location.state }}</p>
+                <p>Suburb: {{ location.suburb }}</p>
+            </div><br>
+        {% endfor %}
+    <br><button onclick="location.href='{% url 'welcome' %}'">Return to Landing Page</button>
+</body>
+{% endblock %}
+</html>

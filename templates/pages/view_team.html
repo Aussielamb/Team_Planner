@@ -1,0 +1,50 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Details</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body class="content">
+    <h1>Team Details</h1>
+    <p>Team: {{ selected_team.team }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Position</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for member in selected_team.teammember_set.all %}
+                {% if member.role == 'Manager' %}
+                    <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.location }}</td>
+                        <td>{{ member.role }}</td>
+                        <td><a href="{% url 'member_details' member.id %}">Details</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for member in selected_team.teammember_set.all %}
+                {% if member.role == 'Member' %}
+                    <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.location }}</td>
+                        <td>{{ member.role }}</td>
+                        <td><a href="{% url 'member_details' member.id %}">Details</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><button onclick="location.href='{% url 'update_team' team_id=selected_team.id %}'">Update Team</button>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,23 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Member</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'welcome/script/forms.js' %}"></script>
+</head>
+{% block content %}
+<body class="content">
+    <h1>Update {{ selected_team.team }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a style="color: red">Warning: Deleting will permanently delete any members assigned to the team.</a>
+        <br><br><button type="submit">Submit</button>
+    </form>
+    <br><a href="{% url 'welcome' %}">Return to Landing Page</a>
+</body>
+{% endblock %}
+</html>

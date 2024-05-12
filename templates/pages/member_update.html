@@ -1,0 +1,21 @@
+{% extends 'pages/landing.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Member</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body class="content">
+    <h1>Update Selected Member</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <br><a href="{% url 'welcome' %}">Return to Landing Page</a>
+</body>
+{% endblock %}
+</html>

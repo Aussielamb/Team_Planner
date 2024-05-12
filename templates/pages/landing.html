@@ -9,44 +9,51 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
 <div class="sidebar">
-    <!-- Sidebar links -->
     <a href="{% url 'admin:index' %}">Admin</a>
+    <a href="{% url 'welcome' %}" class="btn-create">Home</a>
+    <a href="{% url 'locations' %}" class="btn-create">Locations</a>
     <a href="{% url 'new_member' %}" class="btn-create">Create New Member</a>
     <a href="{% url 'new_team' %}" class="btn-create">Create New Team</a>
+
 </div>
     
 {% block content %}
 <div class="content">
     
     <h1>Welcome to Team Planner!</h1>
-    <!-- Loop through locations -->
-    {% for location in locations %}
-        <h2>{{ location.location }}</h2> <!-- Display location/team name as heading -->
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through members associated with the current location -->
-                {% for member in location.teammember_set.all %}
+    {% if teams_exist %}
+        {% for team in all_teams %}
+            <a href="{% url 'view_team' team.id %}">
+                <h2>Team: {{ team.team }}</h2>
+            </a>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ member.name }}</td>
-                        <td>{{ member.location }}</td>
-                        <td><a href="{% url 'member_details' member.id %}">Details</a></td> <!-- Link to member details -->
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Position</th>
+                        <th>Details</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for member in team.teammember_set.all %}
+                        {% if member.role == 'Member' %}
+                            <tr>
+                                <td>{{ member.name }}</td>
+                                <td>{{ member.location }}</td>
+                                <td>{{ member.role }}</td>
+                                <td><a href="{% url 'member_details' member.id %}">Details</a></td> <!-- Link to member details -->
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    {% else %}
+        <p>You currently have no teams. Please select <a href="{% url 'new_team' %}">'Create New Team'</a> from the sidebar</p>
+    {% endif %}
     <p>This is the landing page. You can go to the Django admin interface by clicking <a href="{% url 'admin:index' %}">here</a>.</p>
-    
 </div>
 {% endblock %}
 </body>
