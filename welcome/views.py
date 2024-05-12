@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import TeamMember, Location, TeamName
 from .forms import MemberForm, MemberUpdateForm, TeamForm, TeamUpdateForm
+from django.contrib import messages
 from datetime import datetime
 
 
@@ -22,23 +23,7 @@ def welcome(request):
         'members': members, 'all_teams': all_teams, 'teams_exist': teams_exist})
 
 
-# def new_member(request):
-#     if request.method == 'POST':
-#         # Bind the form with the data from the POST request
-#         form = MemberForm(request.POST)
-#         if form.is_valid():
-#             # Save the form data to create a new member
-#             form.save()
-#             # Redirect to the landing page or any other desired page
-#             return redirect('welcome')  # Assuming 'welcome' is the name of your landing page URL pattern
-#     else:
-#         # If it's a GET request, create a blank form
-#         form = MemberForm()
-#
-#     # Render the template with the form
-#     return render(request, 'pages/new_member.html', {'form': form})
-
-
+# using form for member creation w/ form validation
 def new_member(request):
     if request.method == 'POST':
         form = MemberForm(request.POST)
@@ -51,6 +36,7 @@ def new_member(request):
     return render(request, 'pages/new_team.html', {'form': form})
 
 
+# using form for team creation w/ form validation
 def new_team(request):
     if request.method == 'POST':
         form = TeamForm(request.POST)
@@ -63,6 +49,7 @@ def new_team(request):
     return render(request, 'pages/new_team.html', {'form': form})
 
 
+# view members details. Denies ability to view manager details.
 def member_details(request, member_id):
     member = get_object_or_404(TeamMember, pk=member_id)
 
@@ -74,6 +61,7 @@ def member_details(request, member_id):
         return render(request, 'pages/member_details.html', {'member': member})
 
 
+# View for list of individual teams incl. manager/s of team.
 def view_team(request, team_id):
     all_teams = TeamName.objects.all()
     selected_team = get_object_or_404(TeamName, pk=team_id)
@@ -86,6 +74,7 @@ def view_team(request, team_id):
     return render(request, 'pages/view_team.html', context)
 
 
+# update a member and details via form w/ delete option
 def member_update(request, member_id):
     # Retrieve the member object
     member = get_object_or_404(TeamMember, pk=member_id)

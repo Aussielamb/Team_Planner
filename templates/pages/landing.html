@@ -43,7 +43,7 @@
                                 <td>{{ member.name }}</td>
                                 <td>{{ member.location }}</td>
                                 <td>{{ member.role }}</td>
-                                <td><a href="{% url 'member_details' member.id %}">Details</a></td> <!-- Link to member details -->
+                                <td><a href="{% url 'member_details' member.id %}">Details</a></td> 
                             </tr>
                         {% endif %}
                     {% endfor %}

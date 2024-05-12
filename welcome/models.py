@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# db model for team name
 class TeamName(models.Model):
     team = models.CharField(max_length=50)
 
@@ -8,6 +9,7 @@ class TeamName(models.Model):
         return self.team
 
 
+# db model for locations w/ relevant data
 class Location(models.Model):
     location = models.CharField(max_length=100)
     state = models.CharField(max_length=30)
@@ -19,6 +21,7 @@ class Location(models.Model):
         return self.location
 
 
+# db model for team members and managers collectively
 class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100, choices=(('Manager', 'Manager'), ('Member', 'Member')))
@@ -28,12 +31,3 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class CustomUser(models.Model):
-    # Your model fields here
-
-    class Meta:
-        permissions = [
-            ("can_edit_forms", "Can edit forms"),
-        ]
