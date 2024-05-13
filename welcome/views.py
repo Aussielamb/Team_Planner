@@ -6,19 +6,19 @@ from datetime import datetime
 
 
 def welcome(request):
-    # Get all locations
+    # get all locations
     all_teams = TeamName.objects.all()
 
-    # Get all team members
+    # get all team members
     all_members = TeamMember.objects.all()
 
-    # Check if there are any teams in the database
+    # check if there are any teams in the database
     teams_exist = all_teams.exists()
 
-    # Filter out managers from the list of all members
+    # filter out managers from the list of all members
     members = [member for member in all_members if member.role == 'Member']
 
-    # Pass both members and locations to the template
+    # pass both members and locations to the template
     return render(request, 'pages/landing.html', {
         'members': members, 'all_teams': all_teams, 'teams_exist': teams_exist})
 
@@ -28,7 +28,6 @@ def new_member(request):
     if request.method == 'POST':
         form = MemberForm(request.POST)
         if form.is_valid():
-            # Process the form data
             form.save()
             return redirect('welcome')
     else:
@@ -52,20 +51,19 @@ def new_team(request):
 # view members details. Denies ability to view manager details.
 def member_details(request, member_id):
     member = get_object_or_404(TeamMember, pk=member_id)
-
-    # Check if the member is a manager
+    # check if the member is a manager
     if member.role == 'Manager':
-        # Redirect users to the landing page
+        # redirect users to the landing page
         return redirect('welcome')
     else:
         return render(request, 'pages/member_details.html', {'member': member})
 
 
-# View for list of individual teams incl. manager/s of team.
+# view for list of individual teams incl. manager/s of team.
 def view_team(request, team_id):
     all_teams = TeamName.objects.all()
     selected_team = get_object_or_404(TeamName, pk=team_id)
-    all_members = selected_team.teammember_set.all()  # Retrieve all members associated with the selected team
+    all_members = selected_team.teammember_set.all()  # retrieve all members associated with the selected team
     context = {
         'all_teams': all_teams,
         'selected_team': selected_team,
@@ -76,25 +74,21 @@ def view_team(request, team_id):
 
 # update a member and details via form w/ delete option
 def member_update(request, member_id):
-    # Retrieve the member object
+    # retrieve the member object
     member = get_object_or_404(TeamMember, pk=member_id)
 
     if request.method == 'POST':
-        # Bind the form with the data from the POST request
+        # bind the form with the data from the POST request
         form = MemberUpdateForm(request.POST, instance=member)
         if form.is_valid():
             if form.cleaned_data['delete']:
                 member.delete()
                 return redirect('welcome')
-            # Save the form data to update the member
             form.save()
-            # Redirect to a success page or the member details page
             return redirect('member_details', member_id=member_id)
     else:
-        # If it's a GET request, create a form instance pre-populated with the current member's data
         form = MemberUpdateForm(instance=member)
-
-    # Render the template with the form
+    # render the template with the form
     return render(request, 'pages/member_update.html', {'form': form})
 
 
