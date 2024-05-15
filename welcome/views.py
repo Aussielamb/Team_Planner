@@ -32,7 +32,8 @@ def new_member(request):
             return redirect('welcome')
     else:
         form = MemberForm()
-    return render(request, 'pages/new_member.html', {'form': form, 'heading': 'Create New Member'})
+    return render(request, 'pages/new_member.html', {
+        'form': form, 'heading': 'Create New Member'})
 
 
 # using form for team creation w/ form validation
@@ -45,7 +46,8 @@ def new_team(request):
             return redirect('welcome')
     else:
         form = TeamForm()
-    return render(request, 'pages/new_team.html', {'form': form, 'heading': 'Create New Team'})
+    return render(request, 'pages/new_team.html', {
+        'form': form, 'heading': 'Create New Team'})
 
 
 # view members details. Denies ability to view manager details.
@@ -104,7 +106,8 @@ def team_update(request, team_id):
             return redirect('view_team', team_id=team_id)
     else:
         form = TeamUpdateForm(instance=team)
-    return render(request, 'pages/update_team.html', {'selected_team': team, 'form': form})
+    return render(request, 'pages/update_team.html', {
+        'selected_team': team, 'form': form})
 
 
 def locations(request):
