@@ -32,7 +32,7 @@ def new_member(request):
             return redirect('welcome')
     else:
         form = MemberForm()
-    return render(request, 'pages/new_team.html', {'form': form, 'heading': 'Create New Member'})
+    return render(request, 'pages/new_member.html', {'form': form, 'heading': 'Create New Member'})
 
 
 # using form for team creation w/ form validation
