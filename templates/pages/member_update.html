@@ -15,7 +15,7 @@
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-    <br><a href="{% url 'welcome' %}">Return to home Page</a>
+    <br><button onclick="location.href='{% url 'welcome' %}'">Return to home Page</button>
 </body>
 {% endblock %}
 </html>
